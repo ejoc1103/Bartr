@@ -88,7 +88,7 @@ passport.use(new LocalStrategy(
     
         if(results.password.length === 0){
           done(null, false);
-        }
+        }else{
         
         console.log(results.password.toString());
         const hash = results.password.toString();
@@ -101,6 +101,7 @@ passport.use(new LocalStrategy(
             return done (null, false);
           }
         });
+      }
       })
   }
 ));

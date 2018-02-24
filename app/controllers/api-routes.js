@@ -14,20 +14,42 @@ module.exports = function (app) {
         });
     })
 
-    app.get("/profile", authenticationMiddleware(), function(req, res){
-        res.render('profile', {title: "Profile"})
+    app.get("/profile", authenticationMiddleware(), function (req, res) {
+        res.render('profile', {
+            title: "Profile"
+        })
     });
 
-    app.get('/login', function(req, res){
-        res.render('login', {title: "Login"})
+    app.get('/login', function (req, res) {
+        res.render('login', {
+            title: "Login"
+        })
     });
 
-    app.post('/login', passport.authenticate
-        ("local", {
-            successRedirect: '/profile',
-            failureRedirect: '/login'
-        }));
+    app.post('/login', passport.authenticate("local", {
+        successRedirect: '/profile',
+        failureRedirect: '/login'
+    }));
 
+    app.get("/logout", function (req, res) {
+        req.logout();
+        req.session.destroy();
+        res.redirect("/")
+    });
+
+    app.get("/items", function (req, res) {
+        res.render("items", {
+            title: "Items"
+        });
+    })
+
+    app.post("/items", function (req, res) {
+        db.Items.create({
+
+
+        });
+
+    });
 
     app.get("/register", function (req, res) {
         res.render("register", {
@@ -67,9 +89,9 @@ function authenticationMiddleware() {
     return (req, res, next) => {
         console.log(`
         req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
-    if (req.isAuthenticated()) return next();
+        if (req.isAuthenticated()) return next();
 
-    res.redirect("/login")
+        res.redirect("/login")
     }
 }
 
