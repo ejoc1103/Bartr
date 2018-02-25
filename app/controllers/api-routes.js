@@ -37,19 +37,21 @@ module.exports = function (app) {
         res.redirect("/")
     });
 
-    app.get("/items", function (req, res) {
-        res.render("items", {
-            title: "Items"
-        });
-    })
 
-    app.post("/items", function (req, res) {
-        db.Items.create({
+    //MOVE ITEMS TO item-api-routes.js
+    // app.get("/items", function (req, res) {
+    //     res.render("items", {
+    //         title: "Items"
+    //     });
+    // })
+
+    // app.post("/items", function (req, res) {
+    //     db.Items.create({
 
 
-        });
+    //     });
 
-    });
+    // });
 
     app.get("/register", function (req, res) {
         res.render("register", {
