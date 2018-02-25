@@ -74,6 +74,7 @@ var db = require("./models");
 // Routes
 // ================================================== ===========
 require("./controllers/api-routes.js")(app);
+require("./controllers/item-api-routes.js")(app);
 require("./controllers/html-routes.js")(app);
 
 passport.use(new LocalStrategy(
