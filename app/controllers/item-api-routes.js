@@ -26,7 +26,23 @@ app.post("/api/items", function (req, res) {
 });
 
 
+app.get("/api/items/:itemId?", function (req, res) {
+    
+    var query = {};
+    if(req.params.itemId){
+        query= {id: req.params.itemId}
+    }
 
+
+    db.Item.findAll({
+        where: query
+      }).then(function(dbPost) {
+        console.log(dbPost);
+        res.json(dbPost);
+      });
+
+
+})
 
 
 
