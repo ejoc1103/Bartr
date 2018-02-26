@@ -65,6 +65,11 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
+app.use(function(req, res, next){
+  res.locals.isAuthenticated = req.isAuthenticated();
+  next();
+
+});
 
 // Requiring our models for syncing
 var db = require("./models");
@@ -75,8 +80,8 @@ var db = require("./models");
 // ================================================== ===========
 require("./controllers/api-routes.js")(app);
 require("./controllers/item-api-routes.js")(app);
+require("./controllers/offer-routes.js")(app);
 require("./controllers/html-routes.js")(app);
-
 passport.use(new LocalStrategy(
   function(username, password, done) {
       console.log(username);

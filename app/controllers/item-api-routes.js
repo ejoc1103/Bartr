@@ -2,7 +2,6 @@ var db = require("../models");
     
 module.exports = function(app) {
 
-
 app.get("/additem", function (req, res) {
     res.render("item_add", {
         title: "Post your Item"
@@ -18,8 +17,6 @@ app.post("/api/items", function (req, res) {
         UserId: 1 //need to be mapped to user session
     }).then(function (results) {
 
-
-        res.json(results)
     });
 
 
@@ -55,7 +52,7 @@ app.get("/items", function (req, res) {
 
 app.get("/api/items/:itemId?", function (req, res) {
     
-    var query = {};
+    var query = {}; 
     if(req.params.itemId){
         query= {id: req.params.itemId}
     }
@@ -71,7 +68,6 @@ app.get("/api/items/:itemId?", function (req, res) {
         
        
       }).then(function(dbPost) {
-        console.log(dbPost);
         res.json(dbPost);
       });
 

@@ -5,6 +5,8 @@ var passport = require('passport');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 
+var userSession;
+
 module.exports = function (app) {
     app.get("/", function (req, res) {
         console.log(req.user);
@@ -27,6 +29,10 @@ module.exports = function (app) {
     });
 
     app.post('/login', passport.authenticate("local", {
+        if (authenticationMiddleware){
+            var userSession = $("username").val();
+            console.log(userSession + "this is the username for this session")
+        },
         successRedirect: '/profile',
         failureRedirect: '/login'
     }));
@@ -73,7 +79,6 @@ module.exports = function (app) {
                 req.login(user_id, function (err) {
                     res.redirect('/');
                 });
-                res.json(results)
             });
         });
     });
