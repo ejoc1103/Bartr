@@ -2,7 +2,7 @@ var db = require("../models");
     
 module.exports = function(app) {
 
-app.get("/additem", function (req, res) {
+app.get("/additem", authenticationMiddleware(), function (req, res) {
     res.render("item_add", {
         title: "Post your Item"
     });
@@ -86,3 +86,12 @@ app.get("/api/items/:itemId?", function (req, res) {
 
 
 
+function authenticationMiddleware() {
+    return (req, res, next) => {
+        console.log(`
+        req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+        if (req.isAuthenticated()) return next();
+
+        res.redirect("/login")
+    }
+}
