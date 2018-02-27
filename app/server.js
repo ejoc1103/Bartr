@@ -12,6 +12,7 @@ var cookieParser = require("cookie-parser");
 var passport = require("passport");
 var LocalStrategy = require('passport-local').Strategy;
 
+
 var session = require("express-session");
 var MySQLStore = require("express-mysql-session")(session);
 var bcrypt = require('bcrypt');
@@ -82,6 +83,8 @@ require("./controllers/api-routes.js")(app);
 require("./controllers/item-api-routes.js")(app);
 require("./controllers/offer-routes.js")(app);
 require("./controllers/html-routes.js")(app);
+
+
 passport.use(new LocalStrategy(
   function(username, password, done) {
       console.log(username);
@@ -101,7 +104,8 @@ passport.use(new LocalStrategy(
 
         bcrypt.compare(password, hash, function(err, response){
           if (response ===true ){
-            return done(null, {id: 43});
+            return done(null, {userName: username});
+            
           }
           else {
             return done (null, false);
@@ -115,7 +119,7 @@ passport.use(new LocalStrategy(
 // Syncing our sequelize models and then starting our Express app
 // =============================================================
 db.sequelize.sync({
-  force: false
+  force: true
 }).then(function () {
   app.listen(PORT, function () {
     console.log("App listening on PORT " + PORT);

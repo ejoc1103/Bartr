@@ -17,9 +17,20 @@ module.exports = function (app) {
     })
 
     app.get("/profile", authenticationMiddleware(), function (req, res) {
-        res.render('profile', {
-            title: "Profile"
-        })
+        console.log(req.session.passport.user.userName)
+        db.User.find({
+            where: {
+              userName: req.session.passport.user.userName
+            }
+          }).then(function(results){
+            res.render('profile', {
+                title: 'Profile',
+                user: results.userName,
+                email: results.email,
+                firstName: results.firstName,
+                lastName: results.lastName
+            })
+          });
     });
 
     app.get('/login', function (req, res) {
@@ -29,10 +40,6 @@ module.exports = function (app) {
     });
 
     app.post('/login', passport.authenticate("local", {
-        if (authenticationMiddleware){
-            var userSession = $("username").val();
-            console.log(userSession + "this is the username for this session")
-        },
         successRedirect: '/profile',
         failureRedirect: '/login'
     }));
@@ -107,3 +114,4 @@ function authenticationMiddleware() {
 // .catch(Sequelize.ValidationError, function (err) {
 //     console.log(err + "heres your error")
 // })
+
