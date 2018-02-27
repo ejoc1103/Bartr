@@ -1,18 +1,35 @@
-'use strict';
-module.exports = (sequelize, DataTypes) => {
-  var Offers = sequelize.define('Offers', {
-    offer: DataTypes.STRING,
-    offerName: DataTypes.STRING
+module.exports = function(sequelize, DataTypes) {
+  var Offers = sequelize.define("Offers", {
+      userOffer: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      len: [1]
+    },
+    price: {
+      type: DataTypes.DECIMAL,
+      allowNull: true,
+      len: [1]
+    }
+    
+
   });
 
+  Offers.associate = function(models) {
 
-Offers.associate = function(models) {
-
+    Offers.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
     Offers.belongsTo(models.Item, {
       foreignKey: {
         allowNull: false
       }
     });
+
+    // Offers.hasMany(models.User, {
+    //     onDelete: "cascade"
+    // })
   };
 
   return Offers;
