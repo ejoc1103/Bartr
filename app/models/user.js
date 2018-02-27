@@ -32,7 +32,13 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [2]
       }
+    },
+    imgSource: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      len: [1]
     }
+
   });
     
   User.associate = function(models) {

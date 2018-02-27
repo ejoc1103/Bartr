@@ -6,7 +6,7 @@ module.exports = function(sequelize, DataTypes) {
       len: [1]
     },
     price: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10, 2),
       allowNull: true,
       len: [1]
     }

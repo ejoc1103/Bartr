@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = function (sequelize, DataTypes) {
   var Item = sequelize.define("Item", {
     itemName: {
       type: DataTypes.STRING,
@@ -13,18 +13,38 @@ module.exports = function(sequelize, DataTypes) {
       len: [1]
     },
     price: {
-      type: DataTypes.DECIMAL,
+      type: DataTypes.DECIMAL(10, 2),
+      allowNull: true,
+      len: [1]
+    },
+    itemLocation: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      len: [1]
+    },
+    isSold: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+      defaultValue: false
+    },
+    imgSource: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+      len: [1]
+    },
+    selectOffer: {
+      type: DataTypes.INTEGER,
       allowNull: true,
       len: [1]
     }
-    
+
 
 
 
 
   });
 
-  Item.associate = function(models) {
+  Item.associate = function (models) {
 
     Item.belongsTo(models.User, {
       foreignKey: {
@@ -33,7 +53,7 @@ module.exports = function(sequelize, DataTypes) {
     });
 
     Item.hasMany(models.Offers, {
-        onDelete: "cascade"
+      onDelete: "cascade"
     })
   };
 
