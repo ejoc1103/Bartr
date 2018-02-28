@@ -10,16 +10,14 @@ module.exports = (sequelize, DataTypes) => {
     }
   });
     
-//   User.associate = function(models) {
-//     // Associating Author with Posts
-//     // When an Author is deleted, also delete any associated Posts
-//     User.hasMany(models.Item, {
-//       onDelete: "cascade"
-//     });
-//     User.hasMany(models.Offers, {
-//       onDelete: "cascade"
-//     });
-//   };
+  Category.associate = function(models) {
+    // Associating Author with Posts
+    // When an Author is deleted, also delete any associated Posts
+    Category.hasMany(models.Item, {
+      onDelete: "cascade"
+    });
+  };
+
 
   return Category;
 };
