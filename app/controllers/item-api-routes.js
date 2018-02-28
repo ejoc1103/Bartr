@@ -10,7 +10,7 @@ module.exports = function (app) {
 
     app.post("/api/items", function (req, res) {
 
-
+        console.log(req);
         db.User.find({
 
             where: {
@@ -24,7 +24,8 @@ module.exports = function (app) {
                 description: req.body.description,
                 price: req.body.price,
                 location: req.body.location,
-                UserId: currentUserId
+                UserId: currentUserId,
+                CategoryId: 1
 
             }).then(function (results) {
                 res.json(results)

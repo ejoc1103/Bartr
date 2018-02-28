@@ -17,11 +17,6 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true,
       len: [1]
     },
-    category: {
-      type: DataTypes.STRING,
-      allowNull: true,
-      len: [1]
-    },
     itemLocation: {
       type: DataTypes.TEXT,
       allowNull: true,
@@ -51,6 +46,11 @@ module.exports = function (sequelize, DataTypes) {
   Item.associate = function (models) {
 
     Item.belongsTo(models.User, {
+      foreignKey: {
+        allowNull: false
+      }
+    });
+    Item.belongsTo(models.Category, {
       foreignKey: {
         allowNull: false
       }
