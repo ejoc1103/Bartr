@@ -18,6 +18,14 @@ module.exports = function (app) {
             }
         }).then(function (results) {
             var currentUserId = results.id
+            
+            console.log(req.body.inputCategory)
+
+            // db.Category.find({
+            //     where:{
+            //        Category: req.body.
+            //     }
+            // })
 
             db.Item.create({
                 itemName: req.body.itemName,

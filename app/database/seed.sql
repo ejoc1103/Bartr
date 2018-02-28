@@ -12,7 +12,6 @@ values ('Cars', now(), now());
 insert into bartr_db.categories (Category, updatedAt, createdAt)
 values ('Free Stuff', now(), now());
 
-
 insert into bartr_db.categories (Category, updatedAt, createdAt)
 values ('Motors', now(), now());
 

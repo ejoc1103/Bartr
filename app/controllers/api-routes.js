@@ -7,22 +7,65 @@ const saltRounds = 10;
 
 var userSession;
 
+
+// var output = `
+//         <p>You have signed up!</p>
+//         <h3>Your Details</h3>
+//         <ul>
+//             <li>${results.user}</li>
+//             <li>${"whatever"}</li>
+//         </ul>`;
+
+// Generate test SMTP service account from ethereal.email
+// Only needed if you don't have a real mail account for testing
+// create reusable transporter object using the default SMTP transport
+// let transporter = nodemailer.createTransport({
+//     host: 'smtp.gmail.com',
+//     port: 587,
+//     secure: false, // true for 465, false for other ports
+//     auth: {
+//         user: 'seandillon1224@gmail.com', // generated ethereal user
+//         pass: 'Brandnew1224' // generated ethereal password
+//     }
+// });
+
+// // setup email data with unicode symbols
+// let mailOptions = {
+//     from: '"nodemailer contact" <seandillon1224@gmail.com>', // sender address
+//     to: req.body.email, // list of receivers
+//     subject: 'Hello ✔', // Subject line
+//     text: 'Hello world?', // plain text body
+//     html: output // html body
+// };
+
+// // send mail with defined transport object
+// transporter.sendMail(mailOptions, (error, info) => {
+//     if (error) {
+//         return console.log(error);
+//     }
+//     console.log('Message sent: %s', info.messageId);
+//     // Preview only available when sending through an Ethereal account
+//     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+
+//     res.render("login", {
+//         msg: "Email on the way"
+//     })
+
+// });
+
 module.exports = function (app) {
     app.get("/", function (req, res) {
-        console.log(req.user);
-        console.log(req.isAuthenticated());
         res.render("home", {
             title: "Home"
         });
     })
 
     app.get("/profile", authenticationMiddleware(), function (req, res) {
-        console.log(req.session.passport.user.userName)
         db.User.find({
             where: {
-              userName: req.session.passport.user.userName
+                userName: req.session.passport.user.userName
             }
-          }).then(function(results){
+        }).then(function (results) {
             res.render('profile', {
                 title: 'Profile',
                 user: results.userName,
@@ -30,7 +73,7 @@ module.exports = function (app) {
                 firstName: results.firstName,
                 lastName: results.lastName
             })
-          });
+        });
     });
 
     app.get('/login', function (req, res) {
@@ -82,10 +125,13 @@ module.exports = function (app) {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName
             }).then(function (results) {
-                const user_id = results.id;
-                req.login(user_id, function (err) {
-                    res.redirect('/');
-                });
+                
+
+                    res.render("login", {
+                        msg: "Email on the way"
+                    })
+
+               
             });
         });
     });
@@ -114,4 +160,3 @@ function authenticationMiddleware() {
 // .catch(Sequelize.ValidationError, function (err) {
 //     console.log(err + "heres your error")
 // })
-
