@@ -55,9 +55,20 @@ var userSession;
 
 module.exports = function (app) {
     app.get("/", function (req, res) {
-        res.render("home", {
-            title: "Home"
+
+
+
+        db.Category.findAll({
+           
+        }).then(function (results) {
+            console.log(results)
+            res.render('home', 
+             homeData = {
+                title: 'Home',
+                Category: results
+            })
         });
+
     })
 
     app.get("/profile", authenticationMiddleware(), function (req, res) {

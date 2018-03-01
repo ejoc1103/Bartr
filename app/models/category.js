@@ -7,6 +7,13 @@ module.exports = (sequelize, DataTypes) => {
       validate: {
         len: [4, 15]
       }
+    },
+    imgSource: {
+      type: DataTypes.STRING,
+      allowNull: true,
+      validate: {
+        len: [4, 15]
+      }
     }
   });
     
