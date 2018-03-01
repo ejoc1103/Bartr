@@ -1,5 +1,5 @@
 body {
-	padding-top: 70px;
+	padding-top: 100px;
 	z-index: -2px;
 }
 
@@ -9,6 +9,7 @@ body {
 	position: fixed;
 	top: 0;
 	width: 100%;
+	z-index: 99999;
 }
 
 .navbar a {

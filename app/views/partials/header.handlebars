@@ -67,7 +67,6 @@
 						</div>
 					</div>
 				<div class="col-sm-4 offset-md-1 py-4">
-              <h4 class="text-black">Contact</h4>
               <ul class="list-unstyled">
                 <li><a href="/" class="text-black">Home</a></li>
                 {{#if isAuthenticated}}
@@ -77,16 +76,16 @@
                 <li><a href="/additem" class = "text-black">Add Item</a></li>
                 {{else}}
                 <li><a href="/register" class="text-black">Register</a></li>
-                <li><a href="/login" class="text-black">Login</a></li>
+                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
                 {{/if}}
               </ul>
             </div>
-				<button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+				
         
 
 				<div id="id01" class="modal">
 				
-					<form class="modal-content animate" action="/">
+					<form class="modal-content animate" method ="POST" action="/login">>
 						<div class="imgcontainer">
 							<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
 						</div>

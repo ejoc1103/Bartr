@@ -94,7 +94,7 @@ module.exports = function (app) {
 
     app.post('/login', passport.authenticate("local", {
         successRedirect: '/profile',
-        failureRedirect: '/login'
+        failureRedirect: '/'
     }));
 
     app.get("/logout", function (req, res) {
