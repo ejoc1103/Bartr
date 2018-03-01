@@ -71,9 +71,8 @@ module.exports = function (app) {
 
                 if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/gif") {
 
-                    file.mv('/public/assets/img/item/' + file.name
+                    file.mv('/public/assets/img/item/' + file.name)
                     }
-
 
 
                     db.User.find({
