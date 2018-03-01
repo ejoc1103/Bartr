@@ -3,9 +3,22 @@ var db = require("../models");
 module.exports = function (app) {
 
     app.get("/additem", authenticationMiddleware(), function (req, res) {
-        res.render("item_add", {
-            title: "Post your Item"
-        });
+        
+        db.Category.findAll({
+
+            
+        }).then(function (results) {
+            console.log(results)
+
+            let Category = {
+                Category: results
+            }
+            res.render("item_add", Category)
+        })
+        
+        
+
+   
     })
 
     app.post("/api/items", function (req, res) {
@@ -33,7 +46,7 @@ module.exports = function (app) {
                 price: req.body.price,
                 location: req.body.location,
                 UserId: currentUserId,
-                CategoryId: 1
+                CategoryId: req.body.inputCategory
 
             }).then(function (results) {
                 res.json(results)

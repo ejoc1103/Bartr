@@ -10,17 +10,10 @@
    <div class="form-group">
       <label for="inputCategory">Category</label>
       <select id="inputCategory" name ="inputCategory" class="form-control">
-        <option selected>Choose...</option>
-        <option value = "Cars">Cars</option>
-        <option value = "Free Stuff">Free Stuff</option>
-        <option value = "Motors">Motors</option>
-        <option value = "Tech">Tech</option>
-        <option value = "Leisure">Leisure</option>
-        <option value = "Home">Home</option>
-        <option value = "Entertainment">Entertainment</option>
-        <option value = "Fashion">Fashion</option>
-        <option value = "Child">Child</option>
-        <option value = "Other">Other</option>
+          {{#each Category}}
+            <option value = {{id}}>{{Category}}</option>
+
+           {{/each}}
       </select>
     </div>
 
