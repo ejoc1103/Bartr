@@ -66,10 +66,10 @@ module.exports = function (app) {
             }]
         }).then(function (dbPost) {
             console.log(dbPost.User);
-            let itemDate = {
+            let itemData = {
                 Item: dbPost
             }
-            res.render("items", itemDate);
+            res.render("items", itemData);
         });
 
 

@@ -66,12 +66,11 @@ module.exports = function (app) {
                 userName: req.session.passport.user.userName
             }
         }).then(function (results) {
-            res.render('profile', {
+            console.log(results)
+            res.render('profile', 
+             profileData = {
                 title: 'Profile',
-                user: results.userName,
-                email: results.email,
-                firstName: results.firstName,
-                lastName: results.lastName
+                profile: results
             })
         });
     });
