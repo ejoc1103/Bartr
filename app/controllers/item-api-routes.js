@@ -21,6 +21,46 @@ module.exports = function (app) {
 
     })
 
+    app.get("/api/items/:itemId?", function (req, res) {
+
+        var query = {};
+        if (req.params.itemId) {
+            query = {
+                id: req.params.itemId
+            }
+        }
+ 
+ 
+        // db.Item.findAll({
+        //     where: query,
+        //     include: {
+        //         model: db.User
+        //     },
+        //     include: {
+        //         model: db.Category
+        //     }
+ 
+ 
+ 
+        // }).then(function (dbPost) {
+        //     res.json(dbPost);
+        // });
+ 
+        db.Item.findAll({
+            include:
+            [{ all: true, nested: true }]
+        }).then(function (dbPost) {
+            res.json(dbPost);
+        });
+ 
+ 
+ 
+ 
+ 
+ 
+    })
+
+
     app.post("/api/items", function (req, res) {
 
         console.log(req);
@@ -82,43 +122,7 @@ module.exports = function (app) {
 
 
 
-    app.get("/api/items/:itemId?", function (req, res) {
-
-        var query = {};
-        if (req.params.itemId) {
-            query = {
-                id: req.params.itemId
-            }
-        }
-
-
-        db.Item.findAll({
-            where: query,
-            include: {
-                model: db.User
-            },
-            include: {
-                model: db.Category
-            }
-
-
-
-        }).then(function (dbPost) {
-            res.json(dbPost);
-        });
-
-
-    })
-
-
-
-
-
-
-
-
 };
-
 
 
 

@@ -5,6 +5,7 @@ var passport = require('passport');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var nodemailer = require("nodemailer");
+var homeInfo = {}
 
 var userSession;
 
@@ -53,7 +54,7 @@ function executeEmail(name, email) {
 };
 
 module.exports = function (app) {
-    app.get("/", function (req, res) {
+    app.get("/:?", function (req, res) {
 
 
 
