@@ -49,7 +49,7 @@ module.exports = function (app) {
                 CategoryId: req.body.inputCategory
 
             }).then(function (results) {
-                res.redirect("/")
+                res.redirect("/items")
             });
 
         });
