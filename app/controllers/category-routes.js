@@ -12,8 +12,6 @@ app.get("/api/category/:category?", function (req, res) {
     // category = req.params.category
     // }
 
-    console.log(req.body);
-
     db.Category.findAll({
 
         where: {
@@ -28,7 +26,7 @@ app.get("/api/category/:category?", function (req, res) {
 
 
 
-app.get("/:category?", function (req, res) {
+app.get("/home/:category?", function (req, res) {
 
     db.Category.find({
         where: {
@@ -45,7 +43,7 @@ app.get("/:category?", function (req, res) {
                 items: results,
                 title: req.params.category
             }
-            console.log(itemData.items + "hey here's this")
+            // console.log(itemData.items + "hey here's this")
             
             res.render("home", itemData);
                 }

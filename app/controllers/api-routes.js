@@ -54,14 +54,13 @@ function executeEmail(name, email) {
 };
 
 module.exports = function (app) {
-    app.get("/:?", function (req, res) {
+    app.get("/", function (req, res) {
 
 
 
         db.Category.findAll({
 
         }).then(function (results) {
-            console.log(results)
             res.render('home',
                 homeData = {
                     title: 'Home',
@@ -77,7 +76,6 @@ module.exports = function (app) {
                 userName: req.session.passport.user.userName
             }
         }).then(function (results) {
-            console.log(results)
             res.render('profile',
                 profileData = {
                     title: 'Profile',
@@ -157,8 +155,8 @@ passport.deserializeUser(function (user_id, done) {
 
 function authenticationMiddleware() {
     return (req, res, next) => {
-        console.log(`
-        req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
+        // console.log(`
+        // req.session.passport.user: ${JSON.stringify(req.session.passport)}`);
         if (req.isAuthenticated()) return next();
 
         res.redirect("/login")

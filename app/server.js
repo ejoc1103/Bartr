@@ -11,6 +11,9 @@ var expressValidator = require("express-validator");
 var cookieParser = require("cookie-parser");
 var passport = require("passport");
 var LocalStrategy = require('passport-local').Strategy;
+var multer = require("multer")
+var busboy = require("then-busboy")
+var fileUpload = require('express-fileupload')
 
 
 var session = require("express-session");
@@ -35,6 +38,7 @@ var app = express();
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
+app.use(fileUpload());
 
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({
@@ -72,6 +76,7 @@ app.use(function (req, res, next) {
 
 });
 
+
 // Requiring our models for syncing
 var db = require("./models");
 
@@ -84,6 +89,7 @@ require("./controllers/item-api-routes.js")(app);
 require("./controllers/offer-routes.js")(app);
 require("./controllers/html-routes.js")(app);
 require("./controllers/category-routes.js")(app);
+require("./controllers/edit.js")(app);
 
 passport.use(new LocalStrategy(
   function (username, password, done) {
