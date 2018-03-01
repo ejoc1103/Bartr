@@ -95,8 +95,9 @@ module.exports = function (app) {
         db.Item.findAll({
             where: query,
             include: {
-                model: db.User,
-                model: db.Offers,
+                model: db.User
+            },
+            include: {
                 model: db.Category
             }
 
