@@ -62,7 +62,8 @@ module.exports = function (app) {
 
         db.Item.findAll({
             include: [{
-                model: db.User
+                model: db.User,
+                model: db.Category
             }]
         }).then(function (dbPost) {
             console.log(dbPost.User);
@@ -95,7 +96,8 @@ module.exports = function (app) {
             where: query,
             include: {
                 model: db.User,
-                model: db.Offers
+                model: db.Offers,
+                model: db.Category
             }
 
 
