@@ -41,7 +41,9 @@ nodemailer.createTestAccount((err, account) => {
         // Preview only available when sending through an Ethereal account
         console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-        res.render("login", {msg: "Email on the way"})
+        res.render("login", {
+            msg: "Email on the way"
+        })
 
     });
 });

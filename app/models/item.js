@@ -29,6 +29,7 @@ module.exports = function (sequelize, DataTypes) {
     imgSource: {
       type: DataTypes.TEXT,
       allowNull: true,
+      defaultValue: './assets/img/item/defaultitem.png',
       len: [1]
     },
     selectOffer: {

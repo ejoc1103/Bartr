@@ -1,18 +1,41 @@
 <h1 id="Item List">The Item List</h1>
 
 
+
 <div id="Items">
-<ul>
+
+       <div class="album py-5 bg-light">
+        <div class="container">
+
+          <div class="row">
   {{#each Item}}
 
-    <li id="ready">
-	    <p>item Number: {{id}}.</p>
+
+	    {{!-- <p>item Number: {{id}}.</p>
         <p>item name : {{itemName}}  </p>
         <p>Seller: {{User.userName}}</p>
         <p>Seller email: {{User.email}}</p>
+        <img src={{imgSource}} alt={{itemName}} height="275" > --}}
+
+                  
+            <div class="col-md-4">
+              <div class="card mb-4 box-shadow">
+                <img class="card-img-top" src={{imgSource}} alt={{itemName}}>
+                <div class="card-body">
+                  <p class="card-text">{{description}}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">{{User.userName}}</small>
+                  </div>
+                </div>
+              </div>
+            </div>
 
         {{!-- {{MODAL BEGIN}} --}}
-        <button class="btn btn-primary offer"  data-toggle="modal" data-target=".DATA-{{id}}">Make Offer</button>
+        {{!-- <button class="btn btn-primary offer"  data-toggle="modal" data-target=".DATA-{{id}}">Make Offer</button> --}}
         <div class="modal fade DATA-{{id}}"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -34,13 +57,17 @@
 
         {{!-- {{MODAL END}} --}}
 
-    </li>
+
+
+
+
+  
   {{/each}}
      
 
 
 
-</ul>
+
 
 </div>
 

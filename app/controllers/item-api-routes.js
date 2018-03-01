@@ -3,10 +3,10 @@ var db = require("../models");
 module.exports = function (app) {
 
     app.get("/additem", authenticationMiddleware(), function (req, res) {
-        
+
         db.Category.findAll({
 
-            
+
         }).then(function (results) {
             console.log(results)
 
@@ -15,10 +15,10 @@ module.exports = function (app) {
             }
             res.render("item_add", Category)
         })
-        
-        
 
-   
+
+
+
     })
 
     app.post("/api/items", function (req, res) {
@@ -31,7 +31,7 @@ module.exports = function (app) {
             }
         }).then(function (results) {
             var currentUserId = results.id
-            
+
             console.log(req.body.inputCategory)
 
             // db.Category.find({
@@ -49,7 +49,7 @@ module.exports = function (app) {
                 CategoryId: req.body.inputCategory
 
             }).then(function (results) {
-                res.json(results)
+                res.redirect("/")
             });
 
         });

@@ -66,7 +66,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use(function(req, res, next){
+app.use(function (req, res, next) {
   res.locals.isAuthenticated = req.isAuthenticated();
   next();
 
@@ -86,33 +86,34 @@ require("./controllers/html-routes.js")(app);
 require("./controllers/category-routes.js")(app);
 
 passport.use(new LocalStrategy(
-  function(username, password, done) {
-      console.log(username);
-      console.log(password);
-      db.User.find({
-        where: {
-          userName: username
-        }
-      }).then(function(results){
-    
-        if(results.password.length === 0){
-          done(null, false);
-        }else{
-        
+  function (username, password, done) {
+    console.log(username);
+    console.log(password);
+    db.User.find({
+      where: {
+        userName: username
+      }
+    }).then(function (results) {
+
+      if (results.password.length === 0) {
+        done(null, false);
+      } else {
+
         console.log(results.password.toString());
         const hash = results.password.toString();
 
-        bcrypt.compare(password, hash, function(err, response){
-          if (response ===true ){
-            return done(null, {userName: username});
-            
-          }
-          else {
-            return done (null, false);
+        bcrypt.compare(password, hash, function (err, response) {
+          if (response === true) {
+            return done(null, {
+              userName: username
+            });
+
+          } else {
+            return done(null, false);
           }
         });
       }
-      })
+    })
   }
 ));
 

@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     imgSource: {
       type: DataTypes.TEXT,
       allowNull: true,
-      defaultValue: './assets/img/defaultprofile.jpg',
+      defaultValue: './assets/img/profile/defaultprofile.png',
       len: [1]
     }
 

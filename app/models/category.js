@@ -16,8 +16,8 @@ module.exports = (sequelize, DataTypes) => {
       }
     }
   });
-    
-  Category.associate = function(models) {
+
+  Category.associate = function (models) {
     // Associating Author with Posts
     // When an Author is deleted, also delete any associated Posts
     Category.hasMany(models.Item, {

@@ -2,9 +2,6 @@
 After sequelize syncs run below for seed information
 
 */
-
-
-
 use bartr_db;
 
 insert into bartr_db.categories (Category,imgSource, updatedAt, createdAt)
@@ -24,5 +21,3 @@ values ('Sporting Goods','http://www.freeportnewsnetwork.com/wp-content/uploads/
 
 insert into bartr_db.categories (Category,imgSource, updatedAt, createdAt)
 values ('Other','https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/Emojione_BW_2753.svg/2000px-Emojione_BW_2753.svg.png', now(), now());
-
-

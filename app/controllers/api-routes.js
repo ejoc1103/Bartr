@@ -8,9 +8,9 @@ var nodemailer = require("nodemailer");
 
 var userSession;
 
-function executeEmail(name, email){
+function executeEmail(name, email) {
 
-var output = `
+    var output = `
         <p>You have signed up!</p>
         <h3>Your Details</h3>
         <ul>
@@ -18,38 +18,38 @@ var output = `
             <li>${"whatever"}</li>
         </ul>`;
 
-let transporter = nodemailer.createTransport({
-    host: 'smtp.gmail.com',
-    port: 587,
-    secure: false, // true for 465, false for other ports
-    auth: {
-        user: 'seandillon1224@gmail.com', // generated ethereal user
-        pass: 'Brandnew1224' // generated ethereal password
-    }
-});
-console.log(transporter);
-// setup email data with unicode symbols
-let mailOptions = {
-    from: '"nodemailer contact" <seandillon1224@gmail.com>', // sender address
-    to: email, // list of receivers
-    subject: 'Hello ✔', // Subject line
-    text: 'Hello world?', // plain text body
-    html: output // html body
-};
+    let transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        secure: false, // true for 465, false for other ports
+        auth: {
+            user: 'seandillon1224@gmail.com', // generated ethereal user
+            pass: 'Brandnew1224' // generated ethereal password
+        }
+    });
+    console.log(transporter);
+    // setup email data with unicode symbols
+    let mailOptions = {
+        from: '"nodemailer contact" <seandillon1224@gmail.com>', // sender address
+        to: email, // list of receivers
+        subject: 'Hello ✔', // Subject line
+        text: 'Hello world?', // plain text body
+        html: output // html body
+    };
 
-// send mail with defined transport object
-transporter.sendMail(mailOptions, function(error, info) {
-    // console.log('Message sent: %s', info.messageId);
-    // // Preview only available when sending through an Ethereal account
-    // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    // send mail with defined transport object
+    transporter.sendMail(mailOptions, function (error, info) {
+        // console.log('Message sent: %s', info.messageId);
+        // // Preview only available when sending through an Ethereal account
+        // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-    // res.render("login", {
-    //     msg: "Email on the way"
-    // })
-    console.log(error)
+        // res.render("login", {
+        //     msg: "Email on the way"
+        // })
+        console.log(error)
 
-});
-console.log('mail will go here.')
+    });
+    console.log('mail will go here.')
 };
 
 module.exports = function (app) {
@@ -58,14 +58,14 @@ module.exports = function (app) {
 
 
         db.Category.findAll({
-           
+
         }).then(function (results) {
             console.log(results)
-            res.render('home', 
-             homeData = {
-                title: 'Home',
-                Category: results
-            })
+            res.render('home',
+                homeData = {
+                    title: 'Home',
+                    Category: results
+                })
         });
 
     })
@@ -77,11 +77,11 @@ module.exports = function (app) {
             }
         }).then(function (results) {
             console.log(results)
-            res.render('profile', 
-             profileData = {
-                title: 'Profile',
-                profile: results
-            })
+            res.render('profile',
+                profileData = {
+                    title: 'Profile',
+                    profile: results
+                })
         });
     });
 
@@ -134,13 +134,13 @@ module.exports = function (app) {
                 firstName: req.body.firstName,
                 lastName: req.body.lastName
             }).then(function (results) {
-                
-                    executeEmail(results.userName, results.email)
-                    res.render("login", {
-                        msg: "Email on the way"
-                    })
 
-               
+                executeEmail(results.userName, results.email)
+                res.render("login", {
+                    msg: "Email on the way"
+                })
+
+
             });
         });
     });
