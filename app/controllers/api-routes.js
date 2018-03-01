@@ -4,54 +4,53 @@ var passport = require('passport');
 
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
+var nodemailer = require("nodemailer");
 
 var userSession;
 
+function executeEmail(name, email){
 
-// var output = `
-//         <p>You have signed up!</p>
-//         <h3>Your Details</h3>
-//         <ul>
-//             <li>${results.user}</li>
-//             <li>${"whatever"}</li>
-//         </ul>`;
+var output = `
+        <p>You have signed up!</p>
+        <h3>Your Details</h3>
+        <ul>
+            <li>${name}</li>
+            <li>${"whatever"}</li>
+        </ul>`;
 
-// Generate test SMTP service account from ethereal.email
-// Only needed if you don't have a real mail account for testing
-// create reusable transporter object using the default SMTP transport
-// let transporter = nodemailer.createTransport({
-//     host: 'smtp.gmail.com',
-//     port: 587,
-//     secure: false, // true for 465, false for other ports
-//     auth: {
-//         user: 'seandillon1224@gmail.com', // generated ethereal user
-//         pass: 'Brandnew1224' // generated ethereal password
-//     }
-// });
+let transporter = nodemailer.createTransport({
+    host: 'smtp.gmail.com',
+    port: 587,
+    secure: false, // true for 465, false for other ports
+    auth: {
+        user: 'seandillon1224@gmail.com', // generated ethereal user
+        pass: 'Brandnew1224' // generated ethereal password
+    }
+});
+console.log(transporter);
+// setup email data with unicode symbols
+let mailOptions = {
+    from: '"nodemailer contact" <seandillon1224@gmail.com>', // sender address
+    to: email, // list of receivers
+    subject: 'Hello ✔', // Subject line
+    text: 'Hello world?', // plain text body
+    html: output // html body
+};
 
-// // setup email data with unicode symbols
-// let mailOptions = {
-//     from: '"nodemailer contact" <seandillon1224@gmail.com>', // sender address
-//     to: req.body.email, // list of receivers
-//     subject: 'Hello ✔', // Subject line
-//     text: 'Hello world?', // plain text body
-//     html: output // html body
-// };
+// send mail with defined transport object
+transporter.sendMail(mailOptions, function(error, info) {
+    // console.log('Message sent: %s', info.messageId);
+    // // Preview only available when sending through an Ethereal account
+    // console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
 
-// // send mail with defined transport object
-// transporter.sendMail(mailOptions, (error, info) => {
-//     if (error) {
-//         return console.log(error);
-//     }
-//     console.log('Message sent: %s', info.messageId);
-//     // Preview only available when sending through an Ethereal account
-//     console.log('Preview URL: %s', nodemailer.getTestMessageUrl(info));
+    // res.render("login", {
+    //     msg: "Email on the way"
+    // })
+    console.log(error)
 
-//     res.render("login", {
-//         msg: "Email on the way"
-//     })
-
-// });
+});
+console.log('mail will go here.')
+};
 
 module.exports = function (app) {
     app.get("/", function (req, res) {
@@ -136,7 +135,7 @@ module.exports = function (app) {
                 lastName: req.body.lastName
             }).then(function (results) {
                 
-
+                    executeEmail(results.userName, results.email)
                     res.render("login", {
                         msg: "Email on the way"
                     })
