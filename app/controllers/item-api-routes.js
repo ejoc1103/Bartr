@@ -62,42 +62,41 @@ module.exports = function (app) {
         })
 
 
+
+
         app.post("/api/items", function (req, res) {
-                console.log(req.files)
-
-
-                var file = req.files.uploaded_image;
-                var img_name = file.name;
-
-                if (file.mimetype == "image/jpeg" || file.mimetype == "image/png" || file.mimetype == "image/gif") {
-
-                    file.mv('/public/assets/img/item/' + file.name)
-                    }
-
-
-                    db.User.find({
-
-                        where: {
-                            userName: req.session.passport.user.userName
-                        }
-                    }).then(function (results) {
-                        var currentUserId = results.id
-
-                        db.Item.create({
-                            itemName: req.body.itemName,
-                            description: req.body.description,
-                            price: req.body.price,
-                            location: req.body.location,
-                            UserId: currentUserId,
-                            CategoryId: req.body.inputCategory,
-                            imgSource: 'public/img/item/' + file.name
-
-                        }).then(function (results) {
-                            res.redirect("/items")
-                        });
-
-                    });
-                });
+             // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+             let sampleFile = req.files.uploaded_image;
+            
+             console.log(sampleFile)
+             // Use the mv() method to place the file somewhere on your server
+             sampleFile.mv('./public/assets/img/item/'+req.session.passport.user.userName+sampleFile.name, function(err) {
+ 
+ 
+                 db.User.find({
+ 
+                     where: {
+                         userName: req.session.passport.user.userName
+                     }
+                 }).then(function (results) {
+                     var currentUserId = results.id
+ 
+                     db.Item.create({
+                         itemName: req.body.itemName,
+                         description: req.body.description,
+                         price: req.body.price,
+                         location: req.body.location,
+                         UserId: currentUserId,
+                         CategoryId: req.body.inputCategory,
+                         imgSource: './assets/img/item/'+req.session.passport.user.userName+sampleFile.name
+ 
+                     })
+                 })
+            
+                 
+                 res.redirect("/items");
+             });
+           });
 
 
 
@@ -133,9 +132,54 @@ module.exports = function (app) {
                 })
             });
 
+            app.get('/upload', function (req, res) {
 
+
+                res.render("upload");
+            });
+
+
+
+        // app.post('/upload', function(req, res) {
+
+        //     // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+        //     let sampleFile = req.files.uploaded_image;
+           
+        //     // Use the mv() method to place the file somewhere on your server
+        //     sampleFile.mv('./public/assets/img/item/test1.png', function(err) {
+
+
+        //         db.User.find({
+
+        //             where: {
+        //                 userName: req.session.passport.user.userName
+        //             }
+        //         }).then(function (results) {
+        //             var currentUserId = results.id
+
+        //             db.Item.create({
+        //                 itemName: req.body.itemName,
+        //                 description: req.body.description,
+        //                 price: req.body.price,
+        //                 location: req.body.location,
+        //                 UserId: currentUserId,
+        //                 CategoryId: req.body.inputCategory,
+        //                 imgSource: './assets/img/item/test1.png'
+
+        //             })
+        //         })
+           
+                
+        //         res.redirect("/items");
+        //     });
+        //   });
+
+        
 
         };
+
+
+
 
 
 
