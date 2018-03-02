@@ -5,7 +5,6 @@ var passport = require('passport');
 var bcrypt = require('bcrypt');
 const saltRounds = 10;
 var nodemailer = require("nodemailer");
-var homeInfo = {}
 
 var userSession;
 
@@ -124,6 +123,24 @@ module.exports = function (app) {
     });
 
     app.post("/registernew", function (req, res) {
+        var fileThing = ""
+        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+        if (req.files.uploaded_profile) {
+
+            let sampleFile = req.files.uploaded_profile;
+
+            fileThing = './assets/img/profile/' + req.body.username + sampleFile.name
+
+            // Use the mv() method to place the file somewhere on your server
+            sampleFile.mv('./public/assets/img/profile/' + req.body.username + sampleFile.name)
+        } else {
+
+            fileThing = "./assets/img/profile/defaultprofile.png"
+        }
+
+
+
+
         const password = req.body.password;
         bcrypt.hash(password, saltRounds, function (err, hash) {
             db.User.create({
@@ -131,7 +148,9 @@ module.exports = function (app) {
                 password: hash,
                 email: req.body.email,
                 firstName: req.body.firstName,
-                lastName: req.body.lastName
+                lastName: req.body.lastName,
+                imgSource: fileThing
+
             }).then(function (results) {
 
                 executeEmail(results.userName, results.email)
