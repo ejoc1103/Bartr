@@ -177,13 +177,13 @@ module.exports = function (app) {
       
             let sampleFile = req.files.uploaded_profile;
       
-            fileThing = './assets/img/profile/' + req.body.username + sampleFile.name
+            fileThing = '/assets/img/profile/' + req.body.username + sampleFile.name
       
             // Use the mv() method to place the file somewhere on your server
             sampleFile.mv('./public/assets/img/profile/' + req.body.username + sampleFile.name)
         } else {
       
-            fileThing = "./assets/img/profile/defaultprofile.png"
+            fileThing = "/assets/img/profile/defaultprofile.png"
         }
       
       
