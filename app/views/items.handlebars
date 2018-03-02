@@ -38,10 +38,17 @@
                 <div class="modal-content">
                     <p>item Number: {{id}}.</p>
                     <p>item name : {{itemName}}  </p>
-                    <p>sell email: {{User.email}}</p>
+		    <p>seller's Username: {{User.userName}}</p>
+                    <p>sell's email: {{User.email}}</p>
                     <p>description: {{description}}</p>
                     <p>price: {{price}}  </p>
                     <p>Posted at: {{createdAt}} </p>
+		    <p>Current Offers:</p>
+                    <ul class="current_offer">
+                     {{#each Offers}}
+                    <li>{{this.userOffer}}</li>
+                     {{/each}}
+                      </ul>
                     <form method ="POST" action="/api/offers/{{id}}">
                     <div class="form-group">
                     <label for="offerDescription">Offer</label>
