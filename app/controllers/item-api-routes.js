@@ -120,13 +120,13 @@ module.exports = function (app) {
 
             let sampleFile = req.files.uploaded_image;
 
-            fileThing = './assets/img/item/' + req.session.passport.user.userName + sampleFile.name
+            fileThing = '/assets/img/item/' + req.session.passport.user.userName + sampleFile.name
 
             // Use the mv() method to place the file somewhere on your server
             sampleFile.mv('./public/assets/img/item/' + req.session.passport.user.userName + sampleFile.name)
         } else {
 
-            fileThing = "./assets/img/item/defaultitem.png"
+            fileThing = "/assets/img/item/defaultitem.png"
         }
 
 
@@ -250,7 +250,7 @@ module.exports = function (app) {
     //                 location: req.body.location,
     //                 UserId: currentUserId,
     //                 CategoryId: req.body.inputCategory,
-    //                 imgSource: './assets/img/item/test1.png'
+    //                 imgSource: '/assets/img/item/test1.png'
 
     //             })
     //         })
