@@ -170,53 +170,56 @@ module.exports = function (app) {
 
     // });
 
-    app.get("/register", function (req, res) {
-        res.render("register", {
-            title: "Registration"
-        });
-    });
-
     app.post("/registernew", function (req, res) {
         var fileThing = ""
         // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
         if (req.files.uploaded_profile) {
-
+      
             let sampleFile = req.files.uploaded_profile;
-
+      
             fileThing = './assets/img/profile/' + req.body.username + sampleFile.name
-
+      
             // Use the mv() method to place the file somewhere on your server
             sampleFile.mv('./public/assets/img/profile/' + req.body.username + sampleFile.name)
         } else {
-
+      
             fileThing = "./assets/img/profile/defaultprofile.png"
         }
-
-
-
-
-        const password = req.body.password;
-        bcrypt.hash(password, saltRounds, function (err, hash) {
-            db.User.create({
-                userName: req.body.username,
-                password: hash,
-                email: req.body.email,
-                firstName: req.body.firstName,
-                lastName: req.body.lastName,
-                imgSource: fileThing
-
-            }).then(function (results) {
-
-                executeEmail(results.userName, results.email)
-                res.render("login", {
-                    msg: "Email on the way"
+      
+      
+      
+        db.User.find({
+            where: {userName: req.body.username}
+        }).then(function (results) {
+            console.log(results + "here's the results")
+      
+            if (results !== null) {
+                res.render("register", {
+                    msg: "Someone has that name!"
                 })
-
-
-            });
+            } else {
+                const password = req.body.password;
+                bcrypt.hash(password, saltRounds, function (err, hash) {
+                        db.User.create({
+                                userName: req.body.username,
+                                password: hash,
+                                email: req.body.email,
+                                firstName: req.body.firstName,
+                                lastName: req.body.lastName,
+                                imgSource: fileThing
+                            }
+                        ).then(function (results) {
+      
+                        executeEmail(results.userName, results.email)
+                        res.render("login", {
+                            msg: "Email on the way"
+                        })
+                    })
+                });
+            }
         });
-    });
-}
+      });
+      }
 
 passport.serializeUser(function (user_id, done) {
     done(null, user_id)
