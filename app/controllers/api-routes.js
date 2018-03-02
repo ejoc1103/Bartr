@@ -74,12 +74,31 @@ module.exports = function (app) {
             where: {
                 userName: req.session.passport.user.userName
             }
-        }).then(function (results) {
+        }).then(function (profileResults) {
+            
+        db.Offers.find({
+            where: {
+                UserId: profileResults.id
+            }
+
+
+    }).then(function(offerResults){
+        db.Item.find({
+            where: {
+                UserId: profileResults.id 
+            }
+        })
+
+    }).then(function(itemResults){
+
+    
+
             res.render('profile',
                 profileData = {
                     title: 'Profile',
-                    profile: results
+                    profile: profileResults
                 })
+            });
         });
     });
     
@@ -169,6 +188,11 @@ module.exports = function (app) {
     //     });
 
     // });
+    app.get("/register", function (req, res) {
+        res.render("register", {
+            title: "Registration"
+        });
+    });
 
     app.post("/registernew", function (req, res) {
         var fileThing = ""

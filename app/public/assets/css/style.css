@@ -5,7 +5,7 @@ input:invalid {
   input:valid {
 	border: 2px solid black;
   }
-body {
+/* body {
 	padding-top: 100px;
 	z-index: -2px;
 }
@@ -17,7 +17,7 @@ body {
 	top: 0;
 	width: 100%;
 	z-index: 99999;
-}
+} */
 
 .navbar a {
 	float: right;

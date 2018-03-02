@@ -3,6 +3,8 @@ var db = require("../models");
 module.exports = function (app) {
     
     app.get("/edit", authenticationMiddleware(), function (req, res) {
+        
+        
         console.log(req.session.passport)
         db.User.find({
             where: {
@@ -26,6 +28,7 @@ module.exports = function (app) {
 });
 
 app.put("/api/items", function(req,res){
+
     db.Item.update(
         req.body,
         {where: {
@@ -36,7 +39,22 @@ app.put("/api/items", function(req,res){
     })
 
 });
-}
+
+// app.delete("/api/items/:id"), function(req, res){
+//     console.log(inputted + "hey this inputted!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1")
+  
+  
+//     db.Item.destroy({
+//         where: {
+//             id: req.params.id
+//         }
+//         }).then(function(results){
+//             res.redirect("/items")
+//         })
+//   }
+  }
+
+
 
 
 

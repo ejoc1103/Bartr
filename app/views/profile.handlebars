@@ -1,12 +1,43 @@
-
-    <div>
-    <p>name:  {{profile.firstName}} {{profile.lastName}} </p>
-    <p>email:  {{profile.email}}</p>
-    <p>member since:  {{profile.createdAt}}</p>
-
-    <img src={{profile.imgSource}} alt={{profile.firstName}} height="200" >
+<div class="card text-center">
+    <div class="card-header">
+        Your Profile
     </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-sm-6">
+<img src={{profile.imgSource}} alt={{profile.firstName}}>
+            </div>
+            <div class="col-sm-6">
+            <h5 class="card-title">Username: {{profile.userName}}</h5>
+            <p class="card-text">Full Name: {{profile.firstName}} {{profile.lastName}} </p>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer text-muted">
+        2 days ago
+    </div>
+</div>
 
+<br>
+<br>
 
-
-  
+<div class="row">
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Special title treatment</h5>
+                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+        </div>
+    </div>
+</div>

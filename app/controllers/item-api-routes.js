@@ -207,16 +207,17 @@ module.exports = function (app) {
 
 
 
-    app.put("/api/items", function (req, res) {
-        db.Item.update(
-            req.body, {
-                where: {
-                    id: req.body.id
-                }
-            }).then(function (results) {
-            res.redirect("/items")
-        })
-    });
+    // app.put("/api/items", function (req, res) {
+    //     console.log(req.body.id)
+    //     db.Item.update(
+    //         req.body, {
+    //             where: {
+    //                 id: req.body.id
+    //             }
+    //         }).then(function (results) {
+    //         res.redirect("/items")
+    //     })
+    // });
 
     app.get('/upload', function (req, res) {
 

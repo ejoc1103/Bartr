@@ -1,4 +1,7 @@
-// console.log("bartr js loaded");
+
+// var inputted = $("#inputItem").val()
+// console.log(inputted)
+//console.log("bartr js loaded");
 
 // var form  = document.getElementsByTagName('form')[0];
 // var password = document.getElementById("password");
