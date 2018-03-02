@@ -82,6 +82,60 @@ module.exports = function (app) {
                 })
         });
     });
+    
+    
+        app.get("/1", function (req, res) {
+
+
+        let Categorydata
+        db.Category.findAll({
+
+        }).then(function (data) {
+            Categorydata = data
+        });
+        
+
+        let query = {}
+        if(req.session.passport.user.userName){
+        db.User.find({
+            where: {
+                userName: req.session.passport.user.userName
+            }
+        }).then(function (results) {
+             query = {UserId : results.id}
+        })
+    }
+
+
+        let openOffers
+        db.Item.findAll({
+             where: {
+                query,
+                isSold : 0
+             },
+             include: [
+                 {model: db.Offers},
+                {model: db.User}
+            ],
+            order: [
+                ['createdAt', 'ASC']
+            ]
+            
+        }).then(function (dbPost) {
+            console.log(dbPost)
+
+    
+
+
+
+            res.render('home',
+            homeData = {
+                title: 'Home',
+                Category: Categorydata
+            })
+        });
+
+    })
 
     app.get('/login', function (req, res) {
         res.render('login', {
