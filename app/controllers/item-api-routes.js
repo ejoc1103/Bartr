@@ -14,60 +14,67 @@ module.exports = function (app) {
             }
             res.render("item_add", Category)
         })
+    })
 
-
-              app.get("/api/items/my", function (req, res) {
+        app.get("/api/items/my", function (req, res) {
 
 
             let Categorydata
             db.Category.findAll({
-    
+
             }).then(function (data) {
                 Categorydata = data
             });
-            
-    
+
+
             let query = {}
-            if(req.session.passport.user.userName){
-            db.User.find({
-                where: {
-                    userName: req.session.passport.user.userName
-                }
-            }).then(function (results) {
-                 query = {UserId : results.id}
-            })
-        }
-    
-    
+            if (req.session.passport.user.userName) {
+                db.User.find({
+                    where: {
+                        userName: req.session.passport.user.userName
+                    }
+                }).then(function (results) {
+                    query = {
+                        UserId: results.id
+                    }
+                })
+            }
+
+
             let openOffers
             db.Item.findAll({
-                 where: [
+                where: [
                     query,
-                    {isSold:1}
-                 ],
-                 include: [
-                     {model: db.Offers},
-                    {model: db.User}
+                    {
+                        isSold: 1
+                    }
+                ],
+                include: [{
+                        model: db.Offers
+                    },
+                    {
+                        model: db.User
+                    }
                 ],
                 order: [
                     ['createdAt', 'ASC']
                 ]
-                
+
             }).then(function (dbPost) {
                 console.log(dbPost)
 
 
-        
-            res.json(dbPost);
-        });
 
-    })
+                res.json(dbPost);
+            });
+
+        })
+
+
+
+
 
  
-        
-
-
-    })
 
     app.get("/api/items/:itemId?", function (req, res) {
 
@@ -156,54 +163,57 @@ module.exports = function (app) {
 
 
 
-            app.get("/items/:cat?", function (req, res) {
+    app.get("/items/:cat?", function (req, res) {
 
-                var query = {};
-                if (req.params.cat) {
-                query = {
-                    Category : req.params.cat
+        var query = {};
+        if (req.params.cat) {
+            query = {
+                Category: req.params.cat
+            }
+        }
+
+
+
+        let Categorydata
+        db.Category.findAll({
+
+        }).then(function (data) {
+            Categorydata = data
+        });
+
+
+        db.Item.findAll({
+            where: [{
+                isSold: 0
+            }],
+            include: [{
+                    model: db.Category,
+                    where: query
+                }, {
+                    model: db.User
+                },
+                {
+                    model: db.Offers,
+                    include: [{
+                        model: db.User
+                    }]
                 }
-                }
+            ],
+            order: [
+                ['createdAt', 'ASC']
+            ]
 
+        }).then(function (dbPost) {
+            let itemData = {
+                Item: dbPost,
+                Category: Categorydata
+            }
 
+            console.log(itemData + "here data")
+            res.render("items", itemData);
+        });
 
-                let Categorydata
-                db.Category.findAll({
-
-                }).then(function (data) {
-                    Categorydata = data
-                });
-        
-
-                db.Item.findAll({
-                    where: [
-                       {isSold:0}
-                     ],
-                     include: [{
-                        model: db.Category,
-                        where: query
-                     },{model: db.User},
-                       {model: db.Offers,
-                        include:  [{
-                            model: db.User
-                        }]
-                    }
-                    ],
-                    order: [
-                        ['createdAt', 'ASC']
-                    ]
-                    
-                }).then(function (dbPost) {
-                    let itemData = {
-                        Item: dbPost,
-                        Category: Categorydata
-                    }
-
-                    console.log(itemData + "here data")
-                    res.render("items", itemData);
-                });
-
-            })
+    })
 
 
 
