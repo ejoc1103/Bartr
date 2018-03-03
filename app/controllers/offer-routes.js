@@ -3,10 +3,22 @@ var db = require("../models");
 module.exports = function (app) {
 
     app.post("/api/offers/:itemId", function (req, res) {
+            var fileThing = ""
+        // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+        if (req.files.uploaded_offer) {
+            let sampleFile = req.files.uploaded_offer;
 
+            fileThing = '/assets/img/offers/' + req.body.username + sampleFile.name
+
+            // Use the mv() method to place the file somewhere on your server
+            sampleFile.mv('./public/assets/img/offers/' + req.body.username + sampleFile.name)
+        } else {
+            res.render('/items')
+        }
+
+        
         let itemId = req.params.itemId
 
-        console.log(req.body);
 
         db.User.find({
 
@@ -19,21 +31,13 @@ module.exports = function (app) {
             db.Offers.create({
                 userOffer: req.body.offerDescription,
                 ItemId: itemId,
-                UserId: currentUserId
+                UserId: currentUserId,
+                imgSource: fileThing
 
             }).then(function (results) {
-                res.json(results)
+                res.redirect("/profile")
             });
 
         });
     });
-
-
-
-
-
-
-
-
-
-};
+}
