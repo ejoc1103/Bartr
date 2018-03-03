@@ -50,16 +50,21 @@
                     <li>{{this.userOffer}} offer by: {{this.User.userName}}</li>
                      {{/each}}
                       </ul>
-                    <form method ="POST" action="/api/offers/{{id}}">
-                    <div class="form-group">
-                    <label for="offerDescription">Offer</label>
-                    <input type="text" name = "offerDescription" class ="form-control"  placeholder = "Offer">
-                    <input class="form-control" type="file" name="uploaded_offer" accept="" />
-                    <button type = "submit" class = "btn btn-primary offerButton">Submit Offer</button>
-                    </form>
+                    <form enctype="multipart/form-data" method="POST" action="/api/offers/{{id}}">
+                <div class="form-group">
+                  <label for="offerDescription">Offer</label>
+                  <input type="text" name="offerDescription" class="form-control" placeholder="Offer">
+                  <div class="form-group">
+                    <label for="uploaded_offer" class="col-md-3 control-label">Item Image</label>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="file" name="uploaded_offer" accept="" />
                     </div>
-                </div>
+                  </div>
+                  <button type="submit" class="btn btn-primary offerButton">Submit Offer</button>
+              </form>
+              </div>
             </div>
+          </div>
         </div>
 
         {{!-- {{MODAL END}} --}}
