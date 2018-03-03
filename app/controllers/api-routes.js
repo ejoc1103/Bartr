@@ -53,6 +53,8 @@ function executeEmail(name, email) {
 };
 
 module.exports = function (app) {
+
+
     app.get("/", function (req, res) {
 
 
@@ -69,7 +71,7 @@ module.exports = function (app) {
 
     })
 
-    app.get("/profile", authenticationMiddleware(), function (req, res) {
+    app.get("/profile1", authenticationMiddleware(), function (req, res) {
         db.User.find({
             where: {
                 userName: req.session.passport.user.userName
@@ -107,7 +109,7 @@ module.exports = function (app) {
     });
 
 
-    app.get("/1", function (req, res) {
+    app.get("/profile", function (req, res) {
 
 
         let Categorydata
@@ -117,26 +119,20 @@ module.exports = function (app) {
             Categorydata = data
         });
 
-
-        let query = {}
-        if (req.session.passport.user.userName) {
-            db.User.find({
-                where: {
-                    userName: req.session.passport.user.userName
-                }
-            }).then(function (results) {
-                query = {
-                    UserId: results.id
-                }
-            })
-        }
-
-
         let openOffers
+        let query = {}
+       
+  
+        db.User.find({
+            where: {
+                userName: req.session.passport.user.userName
+            }
+        }).then(function (profileResults) {
+                 
         db.Item.findAll({
-            where: [
-                query
-            ],
+            where: {
+                UserId: profileResults.id
+            },
             include: [{
                     model: db.Offers,
                     include: { model: db.User}
@@ -154,13 +150,14 @@ module.exports = function (app) {
 
             let itemData = {
                 Item: dbPost,
-                Category: Categorydata
+                title: 'Profile',
+                profile: profileResults
             }
 
 
-            res.render("home2", itemData);
+            res.render("profile2", itemData);
         });
-
+    });
     })
 
     app.get('/login', function (req, res) {

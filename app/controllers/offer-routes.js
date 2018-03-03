@@ -15,7 +15,7 @@ module.exports = function (app) {
             // Use the mv() method to place the file somewhere on your server
             sampleFile.mv('./public/assets/img/offers/' + random + req.session.passport.user.userName + sampleFile.name)
         } else {
-            res.redirect('/items')
+            res.render('/items')
         }
 
 
@@ -62,7 +62,7 @@ module.exports = function (app) {
         
 
         db.Item.update({
-            isSold: false
+            isSold: true
         }, {
             where: {
                 id: ItemId
@@ -73,7 +73,7 @@ module.exports = function (app) {
 
 
 
-            res.redirect(307, '/1')
+            res.json(results)
             
         })
         

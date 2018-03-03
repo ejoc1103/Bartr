@@ -10,6 +10,7 @@
             <div class="col-sm-6">
                 <h5 class="card-title">Username: {{profile.userName}}</h5>
                 <p class="card-text">Full Name: {{profile.firstName}} {{profile.lastName}} </p>
+                <p class="card-text">Member Since : {{profile.createdAt}} </p>
             </div>
         </div>
     </div>
@@ -21,13 +22,14 @@
 <br>
 <br> {{#each Item}} {{#unless isSold}}
 <div class="container">
-    <div class="row">
-        <div class="col-sm-3">
+    <div class="row" id="w1m">
+        <div class="col-sm-3" >
             <div class="card box-shadow">
                 <img class="card-img-top" src={{imgSource}}>
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                         <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Edit</button>
+                         <button type="button" data-button={{id}}-box class="btn btn-sm btn-outline-secondary HIDE">HIDE</button>
                     </div>
 
                 </div>
