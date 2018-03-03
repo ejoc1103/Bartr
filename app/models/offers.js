@@ -15,7 +15,13 @@ module.exports = function (sequelize, DataTypes) {
       allowNull: true,
       defaultValue: '',
       len: [1]
+    },
+    offerStatus: {
+      type: DataTypes.TINYINT,
+      defaultValue: 0,
+      len: [1]
     }
+
   });
 
   Offers.associate = function (models) {

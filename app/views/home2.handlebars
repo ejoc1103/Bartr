@@ -42,9 +42,23 @@
                     <p class="card-text font-weight-light">Price: ${{price}}</p>
                     
                     <div class="d-flex justify-content-between align-items-center">
-                        <div class="btn-group">
-                            <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">View</button>
-                        </div>
+                    
+                    {{#if this.Offers}}
+                     <ul class="list-group">
+                    {{#each this.Offers}}
+                     <li class="list-group-item">{{this.userOffer}} 
+                    <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Edit</button>
+                
+
+
+
+                     </li>
+
+                    {{/each}}
+                    </ul>
+                    {{/if}} 
+
                     </div>
                 </div>
             </div>
