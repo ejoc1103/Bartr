@@ -5,11 +5,11 @@
     <div class="card-body">
         <div class="row">
             <div class="col-sm-6">
-<img src={{profile.imgSource}} alt={{profile.firstName}}>
+                <img src={{profile.imgSource}} alt={{profile.firstName}}>
             </div>
             <div class="col-sm-6">
-            <h5 class="card-title">Username: {{profile.userName}}</h5>
-            <p class="card-text">Full Name: {{profile.firstName}} {{profile.lastName}} </p>
+                <h5 class="card-title">Username: {{profile.userName}}</h5>
+                <p class="card-text">Full Name: {{profile.firstName}} {{profile.lastName}} </p>
             </div>
         </div>
     </div>
@@ -19,55 +19,71 @@
 </div>
 
 <br>
-<br>
-<div class = "container">
-{{#each item}}
-{{#if isSold}}
-  <div class="col-sm-4">
-              <div class="card mb-4 box-shadow">
+<br> {{#each item}} {{#unless isSold}}
+<div class="container">
+    <div class="row">
+        <div class="col-sm-3">
+            <div class="card box-shadow">
                 <img class="card-img-top" src={{imgSource}}>
-                <div class="card-body">
-                  <p class="card-text text-lowercase font-weight-bold">{{itemName}}</p>
-                  <p class="card-text text-uppercase font-weight-light">{{description}}</p>
-                  <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/edit">Edit</a></button>
+                        <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">View</button>
                     </div>
-                    {{!-- <small class="text-muted">{{Category.Category}}</small> --}}
-                  </div>
-                </div>
-              </div>
-            </div>
-{{/if}}
-{{/each}}
 
-</div>
- <div class="card-footer text-muted text-center">
-        Your Sold/Cancelled Items
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-9">
+
+            <div class="card box-shadow">
+                <div class="card-body">
+                    <p class="card-text font-weight-bold">Item Name: {{itemName}}</p>
+                    <p class="card-text font-weight-light">Description: {{description}}</p>
+                    <p class="card-text font-weight-light">Price: ${{price}}</p>
+
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="btn-group">
+                            <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">View</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-<br>
-<br>
-
-<div class = "container">
-{{#each item}}
-{{#unless isSold}}
-  <div class="col-sm-4">
-              <div class="card mb-4 box-shadow">
-                <img class="card-img-top" src={{imgSource}}>
-                <div class="card-body">
-                  <p class="card-text text-lowercase font-weight-bold">{{itemName}}</p>
-                  <p class="card-text text-uppercase font-weight-light">{{description}}</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary"><a href="/edit">Edit</a></button>
-                    </div>
-                    {{!-- <small class="text-muted">{{Category.Category}}</small> --}}
-                  </div>
-                </div>
-              </div>
-            </div>
-{{/unless}}
-{{/each}}
 </div>
+{{/unless}} {{/each}}
+
+
+<div class="card-footer text-muted text-center">
+    Your Sold/Cancelled Items
+</div>
+<br>
+<br> {{#each item}} {{#if isSold}}
+<div class="container">
+    <div class="col-sm-3">
+        <div class="card box-shadow">
+            <img class="card-img-top" src={{imgSource}}>
+        </div>
+    </div>
+
+    <div class="col-sm-9">
+        <div class="card box-shadow">
+            <div class="card-body">
+                {{!-- {{#each offer}} --}}
+                <p class="card-text font-weight-bold">Item Name: {{itemName}}</p>
+                <p class="card-text font-weight-light">Description: {{description}}</p>
+                <p class="card-text font-weight-light">Price: ${{price}}</p>
+                {{!-- {{/each}} --}}
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">View</button>
+                    </div>
+                    {{!--
+                    <small class="text-muted">{{Category.Category}}</small> --}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{{/if}} {{/each}}
