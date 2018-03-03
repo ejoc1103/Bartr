@@ -44,13 +44,11 @@ module.exports = function (app) {
             let openOffers
             db.Item.findAll({
                 where: [
-                    query,
-                    {
-                        isSold: 1
-                    }
+                    query
                 ],
                 include: [{
-                        model: db.Offers
+                        model: db.Offers,
+                        include: { model: db.User}
                     },
                     {
                         model: db.User

@@ -134,33 +134,31 @@ module.exports = function (app) {
 
         let openOffers
         db.Item.findAll({
-            where: {
-                query,
-                isSold: 0
-            },
+            where: [
+                query
+            ],
             include: [{
-                    model: db.Offers
+                    model: db.Offers,
+                    include: { model: db.User}
                 },
                 {
                     model: db.User
                 }
             ],
             order: [
-                ['createdAt', 'ASC']
+                ['createdAt', 'DESC']
             ]
 
         }).then(function (dbPost) {
             console.log(dbPost)
 
+            let itemData = {
+                Item: dbPost,
+                Category: Categorydata
+            }
 
 
-
-
-            res.render('home',
-                homeData = {
-                    title: 'Home',
-                    Category: Categorydata
-                })
+            res.render("home2", itemData);
         });
 
     })
