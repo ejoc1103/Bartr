@@ -46,17 +46,19 @@
                     {{#if this.Offers}}
                      <ul class="list-group">
                     {{#each this.Offers}}
-                    
-                     <li class="list-group-item">{{this.userOffer}} 
+                    {{#unless this.OfferStatus}}
 
-                     <img class="card-img-top" src={{this.imgSource}} alt={{this.userOffer}} >
-                    <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Accept</button>
-                    <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Decline</button>
+                     <li class="list-group-item" id="offer" >
+                     <p>{{this.userOffer}} </p>
+                     <img  height="250" src={{this.imgSource}} alt={{this.userOffer}} >
+                      <button type="button" data-button={{this.id}} class="btn btn-sm btn-outline-secondary ACCEPT">ACCEPT</button>
+                      <button type="button" data-button={{this.id}} class="btn btn-sm btn-outline-secondary DECLINE">DECLINE</button>
+                   
                     
 
 
                      </li>
-
+                    {{/unless}}
                     {{/each}}
                     </ul>
                     {{/if}} 

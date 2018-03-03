@@ -13,7 +13,7 @@ module.exports = function (app) {
         // Use the mv() method to place the file somewhere on your server
         sampleFile.mv('./public/assets/img/offers/' +  req.session.passport.user.userName + sampleFile.name)
     } else {
-        res.redirect('/items')
+        res.render('/items')
     }
 
     
@@ -40,4 +40,22 @@ module.exports = function (app) {
 
     });
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
