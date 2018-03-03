@@ -122,13 +122,13 @@ module.exports = function (app) {
         var fileThing = ""
         // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
         if (req.files.uploaded_image) {
-
+            random = Math.floor(Math.random() * 1111) + 1  
             let sampleFile = req.files.uploaded_image;
 
-            fileThing = '/assets/img/item/' + req.session.passport.user.userName + sampleFile.name
+            fileThing = '/assets/img/item/'+ random + req.session.passport.user.userName + sampleFile.name
 
             // Use the mv() method to place the file somewhere on your server
-            sampleFile.mv('./public/assets/img/item/' + req.session.passport.user.userName + sampleFile.name)
+            sampleFile.mv('./public/assets/img/item/'+random + req.session.passport.user.userName + sampleFile.name)
         } else {
 
             fileThing = "/assets/img/item/defaultitem.png"

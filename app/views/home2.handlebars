@@ -46,10 +46,11 @@
                     {{#if this.Offers}}
                      <ul class="list-group">
                     {{#each this.Offers}}
-                    {{#unless this.OfferStatus}}
+                    {{#unless this.offerStatus}}
 
                      <li class="list-group-item" id="offer" >
-                     <p>{{this.userOffer}} </p>
+                     <p>user: {{this.User.userName}} </p>
+                     <p>offers: {{this.userOffer}} </p>
                      <img  height="250" src={{this.imgSource}} alt={{this.userOffer}} >
                       <button type="button" data-button={{this.id}} class="btn btn-sm btn-outline-secondary ACCEPT">ACCEPT</button>
                       <button type="button" data-button={{this.id}} class="btn btn-sm btn-outline-secondary DECLINE">DECLINE</button>
@@ -61,6 +62,7 @@
                     {{/unless}}
                     {{/each}}
                     </ul>
+                    
                     {{/if}} 
 
                     </div>
