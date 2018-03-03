@@ -8,10 +8,10 @@ module.exports = function (app) {
     if (req.files.uploaded_offer) {
         let sampleFile = req.files.uploaded_offer;
 
-        fileThing = '/assets/img/offers/' + req.body.username + sampleFile.name
+        fileThing = '/assets/img/offers/' +  req.session.passport.user.userName + sampleFile.name
 
         // Use the mv() method to place the file somewhere on your server
-        sampleFile.mv('./public/assets/img/offers/' + req.body.username + sampleFile.name)
+        sampleFile.mv('./public/assets/img/offers/' +  req.session.passport.user.userName + sampleFile.name)
     } else {
         res.render('/items')
     }
