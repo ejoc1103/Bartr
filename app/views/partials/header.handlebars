@@ -57,11 +57,16 @@
 			</div>
            <div class="jumbotron text-center"></section>
         
-          <div class="btn-group">
+       
+
+ <div class="btn-group">
 
             {{#each Category}}
-            <button class="button button{{id}} {{Category}}" > <a href="/items/{{Category}}">  <img src={{imgSource}} height="20px"> {{Category}} </button></a>
-            {{/each}}
+			<div class = "col-sm-2">
+			<h6>{{Category}}</h6>
+            <button class="button button{{id}} {{Category}}" > <a href="/items/{{Category}}">  <img src={{imgSource}} height="45px" width = "60px">  </button></a>
+            </div>
+			{{/each}}
 
            </div>
         </div>
