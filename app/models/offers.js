@@ -17,9 +17,8 @@ module.exports = function (sequelize, DataTypes) {
       len: [1]
     },
     offerStatus: {
-      type: DataTypes.TINYINT,
-      defaultValue: 0,
-      len: [1]
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
     }
 
   });

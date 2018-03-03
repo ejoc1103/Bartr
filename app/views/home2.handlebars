@@ -46,10 +46,11 @@
                     {{#if this.Offers}}
                      <ul class="list-group">
                     {{#each this.Offers}}
+                    {{#if this.Offers.offerStatus}}
                      <li class="list-group-item">{{this.userOffer}} 
-                    <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Edit</button>
-                
+                    <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Accept</button>
+                    <button type="button" data-toggle="modal" data-target=".DATA-{{id}}" class="btn btn-sm btn-outline-secondary">Decline</button>
+                    {{/if}} 
 
 
 
